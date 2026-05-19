@@ -1,0 +1,11 @@
+schema_version: 1
+project: ground-control
+github_repo: Brad-Edwards/gc-orchestrator-test
+workflow:
+  base_branch: main
+  test_command: "echo 'no tests'"
+  completion_command: "echo 'no completion gate'"
+  lint_command: "echo 'no linter'"
+  format_command: "echo 'no formatter'"
+telemetry:
+  enabled: true

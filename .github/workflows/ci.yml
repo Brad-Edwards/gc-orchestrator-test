@@ -1,0 +1,17 @@
+name: ci
+on:
+  push:
+  pull_request:
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run hello check
+        run: |
+          if [ -f hello.txt ]; then
+            echo "hello.txt present"
+            cat hello.txt
+          else
+            echo "hello.txt missing (this is expected on the initial commit)"
+          fi
