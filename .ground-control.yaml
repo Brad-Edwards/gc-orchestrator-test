@@ -7,5 +7,28 @@ workflow:
   completion_command: "echo 'no completion gate'"
   lint_command: "echo 'no linter'"
   format_command: "echo 'no formatter'"
+routing:
+  enabled: true
+  default_provider: claude
+  default_fallback: parent
+  stages:
+    issue_branch_resolution: { tier: low, provider: claude, model: claude-haiku-4-5, agent: subagent, fallback: parent }
+    read_issue_context: { tier: low, provider: claude, model: claude-haiku-4-5, agent: subagent, fallback: parent }
+    architecture_preflight: { tier: low, provider: claude, model: claude-haiku-4-5, agent: subagent, fallback: parent }
+    codebase_assessment: { tier: medium, provider: claude, model: claude-sonnet-4-6, agent: subagent, fallback: parent }
+    planning: { tier: high, provider: claude, model: claude-opus-4-7, agent: parent, fallback: error }
+    implementation: { tier: medium, provider: claude, model: claude-sonnet-4-6, agent: subagent, fallback: parent }
+    clause_mapping: { tier: medium, provider: claude, model: claude-sonnet-4-6, agent: subagent, fallback: parent }
+    precommit: { tier: low, provider: claude, model: claude-haiku-4-5, agent: subagent, fallback: parent }
+    completion_gate: { tier: low, provider: claude, model: claude-haiku-4-5, agent: subagent, fallback: parent }
+    review_cycle_1_consume: { tier: high, provider: claude, model: claude-opus-4-7, agent: parent, fallback: error }
+    git_publish: { tier: low, provider: claude, model: claude-haiku-4-5, agent: subagent, fallback: parent }
+    pr_body: { tier: low, provider: claude, model: claude-haiku-4-5, agent: subagent, fallback: parent }
+    ci_monitor: { tier: low, provider: claude, model: claude-haiku-4-5, agent: subagent, fallback: parent }
+    sonarcloud: { tier: low, provider: claude, model: claude-haiku-4-5, agent: subagent, fallback: parent }
+    test_quality_review: { tier: medium, provider: claude, model: claude-sonnet-4-6, agent: subagent, fallback: parent }
+    transition_reconcile: { tier: medium, provider: claude, model: claude-sonnet-4-6, agent: subagent, fallback: parent }
+    close_issue: { tier: low, provider: claude, model: claude-haiku-4-5, agent: subagent, fallback: parent }
+    final_report: { tier: low, provider: claude, model: claude-haiku-4-5, agent: subagent, fallback: parent }
 telemetry:
   enabled: true
